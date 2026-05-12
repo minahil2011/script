@@ -1,0 +1,50 @@
+<script>
+            //step 1
+           let cart = {
+            item[
+                   {name: "Headphones", emoji:"🎧", price:"50"},
+                    {name: "Keyboard", emoji:"⌨️", price:"30"},
+                    {name: "Mouse", emoji:"🖱️", price:"20"},
+            ]
+           }
+            //step 2
+            function saveCart(){
+                let jsonText = JSON.stringify(cart,null,2);
+                document.getElementById("").textContent = "Cart Saved";
+                document.getElementById("").innerHTML = 
+                `<div class="json-block">${jsonText}</div>
+                <p class="succes"> Saved! Now click load cart.</p>`;
+                document.getElementById("").style.display = "block";
+                document.getElementById("").disabled = "false"
+            }
+            //step 3
+            function loadCart(){
+                let jsonText = JSON.stringify(cart);
+                let loadedCart = JSON.parse(jsonText);
+
+                let total = 0;
+                let rows = "";
+
+                loadedCart.items.forEach(function(item){
+                    total += item.price;
+                    rows += `<div class="item-row">
+                        <span>${item.imoji} ${item.name}</span>
+                        span class= "item.price">$S{item.price}</span>
+                    </div>`;
+                })
+                document.getElementById("").textContent = "Cart Loaded";
+                document.getElementById("").innerHtml = 
+                ${rows}
+                `<div class="total-row"><span> Total</span>
+                    <span>$S{total}</span>
+                </div>
+                <p class="success">Loaded Successfully!</p>`
+                document.getElementById("").style.display = "block";
+            }
+
+            //reset all
+            function resetAll(){
+                document.getElementById("").style.display = "none";
+                document.getElementById("").disabled = true;
+            }
+        </script>
