@@ -1,0 +1,51 @@
+/* =============================================
+   PRE-WRITTEN HELPER — Do not change
+   ============================================= */
+   function check(name, msgId, condition, errText, okText) {
+  var input = document.forms["signupForm"][name];
+  var field = input.closest(".field");
+  var msg   = document.getElementById(msgId);
+  if (!condition) {
+    field.className = "field error";
+    msg.textContent = errText;
+    return false;
+  }
+  field.className = "field valid";
+  msg.textContent = okText;
+  return true;
+}
+
+
+/* =============================================
+   YOUR TASK — Write your code below
+   ============================================= */
+
+function validateForm(){
+    var name = document.forms["signupForm"]["fullname"].value.trim();
+    var email = document.forms["signupForm"]["email"].value.trim();
+    var pwd = document.forms["signupForm"]["password"].value;
+    var age = document.forms["signupForm"]["age"].value;
+
+    var v1 = check("fullname","msg-name", name !== "",  "Full name is required.", 
+        "Looks good."
+    );
+    var v2 = check("email","msg-email", email!== "" && email.includes("@"),
+        email === "" ? "Email is required." : "Must includes @.",
+        "Valid email address."
+    );
+    var v3 = check("password","msg-pwd", pwd.length>=8, pwd === ""?
+        "Password is required." : "Min 8 characters.", "Strong password!"
+    );
+    var v4 = check("age","msg-age", age !== ""&&Number(age) >= 13, 
+        age ===""? "Age is required" : "Must be 13 or older", "Age varified!"
+    );
+
+    if(v1 && v2 && v3 && v4){
+        var el = document.getElementById("success");
+        el.style.display = "block";
+        el.innerHTML = 
+        "<strong>Account Created!</strong><br>WELCOME to Instagram! <strong>"
+        + name + "</strong>. Start sharing your moments!"; 
+    }
+    return false;
+}
